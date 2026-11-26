@@ -1,6 +1,6 @@
 # lobmm: signal-aware market making on crypto order books
 
-![CI](https://github.com/YOUR_GITHUB_USERNAME/lobmm/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Ram22nov/lobmm/actions/workflows/ci.yml/badge.svg)
 
 A small, honest version of a crypto market-making desk. It rebuilds the Binance USD-M futures
 order book from tick data, measures how well order-book features predict the next 1–30 seconds
