@@ -1,0 +1,6 @@
+# Keep LF line endings in the repo so Windows checkouts and Linux CI agree.
+* text=auto eol=lf
+*.parquet binary
+*.gz binary
+*.png binary
+*.pdf binary

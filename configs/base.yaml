@@ -1,0 +1,70 @@
+# Base configuration for every lobmm run.
+# Every run reads a config like this one and saves a copy next to its results.
+
+seed: 42
+
+market:
+  exchange: binance-futures
+  symbol: SOLUSDT                 # provisional; final choice after market facts (week 2)
+  candidates: [SOLUSDT, XRPUSDT, BTCUSDT]
+  comparison_symbol: BTCUSDT      # small-tick comparison, 2-3 days only
+  min_tick_over_price_bp: 0.3     # prefer contracts where one tick >= 0.3 bp of price
+
+data:
+  raw_dir: data/raw
+  parquet_dir: data/parquet
+  data_types: [incremental_book_L2, book_snapshot_25, trades, derivative_ticker]
+
+days:
+  # Day used for prototyping the pipeline (download, Parquet, book rebuild).
+  # It is a research day on purpose: never explore on a locked test day.
+  dev_day: "2026-07-01"
+  # 12 research days: feature work, tuning, walk-forward splits.
+  research:
+    - "2025-08-01"
+    - "2025-09-01"
+    - "2025-10-01"
+    - "2025-11-01"
+    - "2025-12-01"
+    - "2026-01-01"
+    - "2026-02-01"
+    - "2026-03-01"
+    - "2026-04-01"
+    - "2026-05-01"
+    - "2026-06-01"
+    - "2026-07-01"
+  # 4 locked test days: run once, at the end (17 Jan 2027), with frozen settings.
+  test:
+    - "2026-08-01"
+    - "2026-09-01"
+    - "2026-10-01"
+    - "2026-11-01"
+  # Days reported with and without (holidays, gaps).
+  flagged: ["2026-01-01"]
+
+sampling:
+  interval_ms: 100
+  horizons_s: [1, 5, 30]
+  decay_horizons_s: [1, 2, 5, 10, 30, 60]
+
+fees:
+  maker_bp: 2.0
+  taker_bp: 5.0
+
+latency:
+  base_ms: 50
+
+strategy:
+  order_size: min               # smallest allowed size
+  position_cap_orders: 5
+  kappa_ticks_per_order: 0.5
+  alpha: 0.0                    # 0 for S1 and S2
+
+grids:
+  maker_fee_bp: [2.0, 1.0, 0.0, -0.5]
+  latency_ms: [0, 50, 200, 500]
+  position_cap_orders: [3, 5, 10]
+  kappa_ticks_per_order: [0.0, 0.25, 0.5, 1.0]
+  alpha: [0.5, 1.0, 1.5]
+
+markout_horizons_s: [0, 1, 2, 5, 10, 30, 60]

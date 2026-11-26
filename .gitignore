@@ -1,0 +1,27 @@
+# Data (raw CSV.gz and Parquet) never goes in git
+data/raw/
+data/parquet/
+data/interim/
+
+# Run outputs (each run folder holds results + a copy of its config)
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Tools
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
