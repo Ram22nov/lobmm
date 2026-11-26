@@ -36,6 +36,12 @@ def test_dev_day_is_not_a_locked_test_day(cfg):
     assert dt.date.fromisoformat(cfg["days"]["dev_day"]) not in get_test_days(cfg)
 
 
+def test_weekend_list_matches_the_calendar(cfg):
+    all_days = get_research_days(cfg) + get_test_days(cfg)
+    weekend = {dt.date.fromisoformat(d) for d in cfg["days"]["weekend"]}
+    assert weekend == {d for d in all_days if d.weekday() >= 5}
+
+
 def test_overlapping_split_is_rejected(cfg):
     bad = copy.deepcopy(cfg)
     bad["days"]["test"].append(bad["days"]["research"][-1])

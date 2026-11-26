@@ -41,6 +41,9 @@ days:
     - "2026-11-01"
   # Days reported with and without (holidays, gaps).
   flagged: ["2026-01-01"]
+  # Weekend days, for weekday-vs-weekend robustness checks.
+  # Note: 2 of the 4 test days are weekends, against 3 of the 12 research days.
+  weekend: ["2025-11-01", "2026-02-01", "2026-03-01", "2026-08-01", "2026-11-01"]
 
 sampling:
   interval_ms: 100

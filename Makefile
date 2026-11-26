@@ -1,6 +1,6 @@
 # On Windows, run these through Git Bash, or type the uv commands directly in PowerShell.
 
-.PHONY: setup test lint format download-dev all
+.PHONY: setup test lint format download-dev convert-dev convert-all all
 
 setup:
 	uv sync
@@ -19,6 +19,12 @@ format:
 
 download-dev:
 	uv run lobmm download
+
+convert-dev:
+	uv run lobmm convert --verify
+
+convert-all:
+	uv run lobmm convert --all-days
 
 # Grows stage by stage: download -> convert -> book -> features -> research -> backtest -> analysis
 all: test
